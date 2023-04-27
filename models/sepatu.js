@@ -9,7 +9,7 @@ const create = (body) => {
 const read = (queryString) => {
   const eachWhere = Object.keys(queryString);
   if (eachWhere.length == 0) {
-    const query = `SELECT tb_merk.merk, tb_sepatu.model, tb_sepatu.ukuran, tb_sepatu.harga, tb_sepatu.kondisi FROM tb_sepatu JOIN merk on tb_sepatu.id_merk = merk.id`;
+    const query = `SELECT tb_merk.merk, tb_sepatu.model, tb_sepatu.ukuran, tb_sepatu.harga, tb_sepatu.kondisi FROM tb_sepatu JOIN tb_merk on tb_sepatu.id_merk = merk.id`;
     return db.execute(query);
   } else {
     let where = "";
@@ -17,7 +17,7 @@ const read = (queryString) => {
       where += `${q}='${queryString[q]}' AND `;
     });
     where = where.slice(0, -5);
-    const query = `SELECT merk.merk, tb_sepatu.model, tb_sepatu.ukuran, tb_sepatu.harga, tb_sepatu.kondisi FROM tb_sepatu JOIN merk on tb_sepatu.id_merk = merk.id WHERE ${where}`;
+    const query = `SELECT merk.merk, tb_sepatu.model, tb_sepatu.ukuran, tb_sepatu.harga, tb_sepatu.kondisi FROM tb_sepatu JOIN tb_merk on tb_sepatu.id_merk = merk.id WHERE ${where}`;
     return db.execute(query);
   }
 };
