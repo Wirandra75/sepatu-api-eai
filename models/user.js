@@ -1,5 +1,4 @@
 const db = require("../config/db");
-const bcrypt = require("bcrypt");
 
 const getUser = (email) => {
   const query = `SELECT * FROM tb_user WHERE email='${email}'`;
@@ -8,12 +7,10 @@ const getUser = (email) => {
 };
 
 const addUser = (body) => {
-  bcrypt.hash(body.password, 10, (err, hash) => {
-    const query = `INSERT INTO tb_user (email, name, password) 
-                    VALUES ('${body.email}', '${body.name}', '${hash}')`;
+  const query = `INSERT INTO tb_user (email, name, password) 
+                  VALUES ('${body.email}', '${body.name}', '${hash}')`;
 
-    return db.execute(query);
-  });
+  return db.execute(query);
 };
 
 module.exports = {
