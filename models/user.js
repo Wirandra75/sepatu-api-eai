@@ -8,7 +8,7 @@ const getUser = (email) => {
 
 const addUser = (body) => {
   const query = `INSERT INTO tb_user (email, name, password) 
-                  VALUES ('${body.email}', '${body.name}', '${hash}')`;
+                  VALUES ('${body.email}', '${body.name}', '${password}')`;
 
   return db.execute(query);
 };
